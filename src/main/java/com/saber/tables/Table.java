@@ -108,6 +108,22 @@ public class Table {
             //用于标注sheet表名下标
             int sheetIndex = 0;
 
+            HSSFPalette palette = wb.getCustomPalette(); //wb HSSFWorkbook对象
+
+            style = wb.createCellStyle();
+            font = wb.createFont();
+
+            //设置样式 右对齐
+            CellStyle cs_colnumId = wb.createCellStyle();
+            cs_colnumId.setAlignment(HorizontalAlignment.RIGHT);
+
+            //备注为空的样式
+            CellStyle cellStyle = wb.createCellStyle();
+            cellStyle.setFillPattern(FillPatternType.FINE_DOTS);//设置前景填充样式 纯色填充
+            cellStyle.setFillForegroundColor((short) 9);//前景填充色
+            //设置自动换行
+            cellStyle.setWrapText(true);
+
             //遍历表
             for (String tableName : map.keySet()) {
 
@@ -125,9 +141,6 @@ public class Table {
                     //以表名做sheet名
                     wb.setSheetName(sheetIndex, tableName);
                     sheetIndex++;
-
-                    style = wb.createCellStyle();
-                    font = wb.createFont();
 
                     //新建一行,再在行上面新建一列
                     row = sheet.createRow(currentRowNum);
@@ -214,9 +227,7 @@ public class Table {
                         //COLUMN_ID
                         cell = row.createCell((short) 4);
                         cell.setCellValue(String.valueOf(COLUMN_ID));
-                        //设置样式 右对齐
-                        CellStyle cs_colnumId = wb.createCellStyle();
-                        cs_colnumId.setAlignment(HorizontalAlignment.RIGHT);
+
                         cell.setCellStyle(cs_colnumId);
                         //设置宽度
                         sheet.setColumnWidth((short) 4, (short) 2500);
@@ -236,14 +247,8 @@ public class Table {
                             //不隐藏
                             isHide = false;
 
-                            HSSFPalette palette = wb.getCustomPalette(); //wb HSSFWorkbook对象
                             palette.setColorAtIndex((short) 9, (byte) (197), (byte) (230), (byte) (241));
 
-                            CellStyle cellStyle = wb.createCellStyle();
-                            cellStyle.setFillPattern(FillPatternType.FINE_DOTS);//设置前景填充样式 纯色填充
-                            cellStyle.setFillForegroundColor((short) 9);//前景填充色
-                            //设置自动换行
-                            cellStyle.setWrapText(true);
                             cell.setCellStyle(cellStyle);
                         }
                     }
@@ -263,14 +268,8 @@ public class Table {
                         //不隐藏
                         isHide = false;
 
-                        HSSFPalette palette = wb.getCustomPalette(); //wb HSSFWorkbook对象
                         palette.setColorAtIndex((short) 9, (byte) (220), (byte) (230), (byte) (241));
 
-                        CellStyle cellStyle = wb.createCellStyle();
-                        cellStyle.setFillPattern(FillPatternType.FINE_DOTS);//设置前景填充样式 纯色填充
-                        cellStyle.setFillForegroundColor((short) 9);//前景填充色
-                        //设置自动换行
-                        cellStyle.setWrapText(true);
                         cell.setCellStyle(cellStyle);
                     }
 
